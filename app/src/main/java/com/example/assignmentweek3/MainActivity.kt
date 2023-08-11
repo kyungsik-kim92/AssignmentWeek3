@@ -13,6 +13,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+            setFragment()
+      }
 
+    private fun setFragment() {
+        val searchFragment = supportFragmentManager.beginTransaction()
+        searchFragment.replace(R.id.fragmentContainerView,SearchFragment()).commit()
     }
 }
