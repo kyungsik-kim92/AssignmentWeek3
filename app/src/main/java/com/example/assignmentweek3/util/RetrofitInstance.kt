@@ -9,8 +9,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 object RetrofitInstance {
-
-
     private val retrofit: Retrofit
         get() = Retrofit.Builder()
             .baseUrl(BASE_URL)

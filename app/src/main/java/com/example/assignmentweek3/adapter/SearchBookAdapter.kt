@@ -21,4 +21,14 @@ class SearchBookAdapter : RecyclerView.Adapter<SearchBookViewHolder>() {
     override fun onBindViewHolder(holder: SearchBookViewHolder, position: Int) {
         holder.bind(documents[position])
     }
+
+
+    fun addAll(list : List<Document>){
+        documents.clear()
+        documents.addAll(list)
+        notifyDataSetChanged()
+    }
+
+
+
 }
