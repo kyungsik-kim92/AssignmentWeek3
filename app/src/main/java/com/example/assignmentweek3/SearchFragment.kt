@@ -18,7 +18,7 @@ class SearchFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    private val bookSearchViewModel by viewModels<BookSearchViewModel>()
+    private lateinit var bookSearchViewModel: BookSearchViewModel
     private lateinit var searchBookAdapter: SearchBookAdapter
 
     override fun onCreateView(
@@ -28,19 +28,7 @@ class SearchFragment : Fragment() {
         _binding = FragmentSearchBinding.inflate(inflater,container,false)
         return binding.root
 
-    }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        setupRecyclerView()
-
-        bookSearchViewModel.searchApiLiveData.observe(viewLifecycleOwner) { response ->
-            if(response !=null ){
-                searchBookAdapter
-            }
-        }
 
     }
 
@@ -49,6 +37,32 @@ class SearchFragment : Fragment() {
         binding.rvSearchResult.adapter = searchBookAdapter
 
     }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+
+        searchBookAdapter = SearchBookAdapter()
+        setupRecyclerView()
+
+
+        bookSearchViewModel = (activity as MainActivity).bookSearchViewModel
+
+        binding.btnSearch.setOnClickListener {
+            bookSearchViewModel.searchBooks(binding.etSearch.text.toString())
+        }
+        bookSearchViewModel.searchResultLiveData.observe(viewLifecycleOwner) {
+            searchBookAdapter.addAll(it)
+        }
+
+
+
+
+    }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.assignmentweek3.adapter.SearchBookAdapter
 import com.example.assignmentweek3.model.BookSearchData
 import com.example.assignmentweek3.model.Document
 import com.example.assignmentweek3.repository.SearchBookRepository
@@ -17,16 +16,13 @@ import retrofit2.Response
 class BookSearchViewModel(private val searchBookRepository: SearchBookRepository) :ViewModel(){
 
    //
-    private val _searchApiLiveData = MutableLiveData<BookSearchData>()
-    val searchApiLiveData: LiveData<BookSearchData> = _searchApiLiveData
-
     private val _searchResultLiveData = MutableLiveData<List<Document>>()
     val searchResultLiveData: LiveData<List<Document>> = _searchResultLiveData
 
 
 
 
-    fun searchBook(query: String) = viewModelScope.launch(Dispatchers.IO) {
+    fun searchBooks(query: String) = viewModelScope.launch(Dispatchers.IO) {
         if (query.isNotEmpty()) {
             searchBookRepository.searchBooks(
                 query,
