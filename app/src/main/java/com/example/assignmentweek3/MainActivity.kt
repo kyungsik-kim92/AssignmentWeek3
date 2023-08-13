@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         bookSearchViewModel = ViewModelProvider(this, factory)[BookSearchViewModel::class.java]
 
 
+
     }
 
     private fun setFragment() {

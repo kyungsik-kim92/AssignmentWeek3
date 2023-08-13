@@ -1,6 +1,7 @@
 package com.example.assignmentweek3
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,7 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var bookSearchViewModel: BookSearchViewModel
-    private lateinit var searchBookAdapter: SearchBookAdapter
+    private val searchBookAdapter: SearchBookAdapter = SearchBookAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,26 +33,19 @@ class SearchFragment : Fragment() {
 
     }
 
-    private fun setupRecyclerView() {
-        searchBookAdapter = SearchBookAdapter()
-        binding.rvSearchResult.adapter = searchBookAdapter
 
-    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-        searchBookAdapter = SearchBookAdapter()
-        setupRecyclerView()
-
+        binding.rvSearchResult.adapter = searchBookAdapter
 
         bookSearchViewModel = (activity as MainActivity).bookSearchViewModel
 
         binding.btnSearch.setOnClickListener {
             bookSearchViewModel.searchBooks(binding.etSearch.text.toString())
+
         }
         bookSearchViewModel.searchResultLiveData.observe(viewLifecycleOwner) {
             searchBookAdapter.addAll(it)

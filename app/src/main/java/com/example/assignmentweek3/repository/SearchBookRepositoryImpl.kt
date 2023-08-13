@@ -5,7 +5,7 @@ import com.example.assignmentweek3.util.RetrofitInstance
 import retrofit2.Call
 
 class SearchBookRepositoryImpl : SearchBookRepository {
-    override suspend fun searchBooks(
+    override fun searchBooks(
         query: String,
         sort: String,
         page: Int,

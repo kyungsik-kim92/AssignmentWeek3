@@ -5,7 +5,7 @@ import retrofit2.Call
 
 interface SearchBookRepository {
 
-    suspend fun searchBooks(
+   fun searchBooks(
         query: String,
         sort: String,
         page: Int,
