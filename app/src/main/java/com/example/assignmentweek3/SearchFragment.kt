@@ -43,10 +43,11 @@ class SearchFragment : Fragment() {
 
         bookSearchViewModel = (activity as MainActivity).bookSearchViewModel
 
-        binding.btnSearch.setOnClickListener {
-            bookSearchViewModel.searchBooks(binding.etSearch.text.toString())
+            binding.btnSearch.setOnClickListener {
+                bookSearchViewModel.searchBooks(binding.etSearch.text.toString())
 
-        }
+            }
+
         bookSearchViewModel.searchResultLiveData.observe(viewLifecycleOwner) {
             searchBookAdapter.addAll(it)
         }
